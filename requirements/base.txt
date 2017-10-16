@@ -1,0 +1,8 @@
+dj-database-url
+django
+django-compressor
+django-extensions
+django-sass-processor
+django-widget-tweaks
+libsass
+psycopg2

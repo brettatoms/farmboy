@@ -1,0 +1,15 @@
+{% extends './base.html %}
+{#% load static %#}
+{% block content %}
+    <div class="container">
+        <a href="{% url 'crops_add' %}">Add crop</a>
+        <div class="list-group">
+            {% for crop in crops %}
+                <a href="{% url 'crops_detail' crop.id %}"
+                   class="list-group-item list-group-item-action">
+                    {{ crop.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
