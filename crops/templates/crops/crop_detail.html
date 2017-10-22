@@ -2,6 +2,7 @@
 {% block content %}
     <div class="container">
         <h2>{{ crop.name }}</h2>
+        <a href="{% url 'crops_edit' crop.id %}">Edit</a>
         <p>{{ crop.notes }}</p>
     </div>
 {% endblock %}

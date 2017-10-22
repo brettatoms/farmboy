@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template import loader
 from django import forms
 from django.contrib import messages
+from django.urls import reverse
 
 from .models import Crop
 
@@ -30,10 +31,36 @@ def create(request):
         form = CropForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'{ form["name"].data} saved')
+            messages.success(request, f'{ form["name"].data } saved')
             return redirect('crops_add')
     else:
         form = CropForm()
 
-    context = {'form': form}
-    return render(request, 'crops/crop_add.html', context)
+    context = {
+        'form': form,
+        'form_action': reverse('crops_add'),
+        'save_button_text': 'Create',
+        'header_text': 'Add crop'
+    }
+    return render(request, 'crops/crop_form.html', context)
+
+
+def update(request, crop_id):
+    instance = get_object_or_404(Crop, pk=crop_id)
+    form = CropForm(request.POST or None, instance=instance)
+    print(form)
+    print(form.is_valid())
+    if form.is_valid():
+        form.save()
+        messages.success(request, f'{ form["name"].data } saved')
+        return redirect('crops_edit', crop_id)
+
+    context = {
+        'form': form,
+        'form_action': reverse('crops_edit', kwargs={
+            'crop_id': instance.id
+        }),
+        'save_button_text': 'Save',
+        'header_text': instance.name
+    }
+    return render(request, 'crops/crop_form.html', context)
