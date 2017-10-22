@@ -22,7 +22,7 @@ from . import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^crops/', include('crops.urls')),
-    url(r'^.*$', RedirectView.as_view(pattern_name='crops_index' ))
+    url(r'^$', RedirectView.as_view(pattern_name='crops_index'))
 ]
 
 if settings.DEBUG:
