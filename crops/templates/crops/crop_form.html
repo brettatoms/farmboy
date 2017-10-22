@@ -2,25 +2,26 @@
 {% load widget_tweaks %}
 {% block content %}
     <div class="container">
-        <h1>Add a Crop</h1>
+        <h1>{{ header_text }}</h1>
         {% if messages %}
             {% for message in messages %}
                 <div{% if message.tags %} class="alert alert-{{ message.level_tag }} {{ message.tags }} "{% endif %}>{{ message }}</div>
             {% endfor %}
         {% endif %}
 
-        {{ form.errors }}
+        {{ form.non_field_errors }}
 
-        <form action="{% url 'crops_add' %}" method="post">
+        <form action="{{ form_action }}" method="post">
             {% csrf_token %}
             {% for field in form %}
                 <div class="form-group">
                     {% render_field field.label %}
                     {% render_field field class="form-control" %}
+                    {{ field.errors }}
                 </div>
             {% endfor %}
             <div class="form-group">
-                <input type="submit" value="Create" class="btn" />
+                <input type="submit" value="{{ save_button_text }}" class="btn"/>
             </div>
         </form>
     </div>
