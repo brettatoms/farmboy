@@ -136,6 +136,6 @@ STATICFILES_FINDERS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-# STATICFILES_DIRS = [os.path.join(PROJECT_ROOT, 'static')]
+STATICFILES_DIRS = [os.path.join(PROJECT_ROOT, 'static')]
 
 SASS_PROCESSOR_ENABLED = True
