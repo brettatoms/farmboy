@@ -48,8 +48,6 @@ def create(request):
 def update(request, crop_id):
     instance = get_object_or_404(Crop, pk=crop_id)
     form = CropForm(request.POST or None, instance=instance)
-    print(form)
-    print(form.is_valid())
     if form.is_valid():
         form.save()
         messages.success(request, f'{ form["name"].data } saved')
